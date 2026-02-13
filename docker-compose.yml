@@ -1,0 +1,25 @@
+services:
+  api:
+    build: .
+    image: mnist-api:latest
+    container_name: mnist-api
+    ports:
+      - "8000:8000"
+    environment:
+      - MODEL_PATH=/app/model_weights.pth
+    volumes:
+      # 掛載本地 test 資料夾，方便執行批次預測 (docker exec -it mnist-api python batch_predict.py)
+      - ./test:/app/test
+      - ./result.csv:/app/result.csv
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD", "python", "-c", "import urllib.request; print(urllib.request.urlopen('http://localhost:8000').getcode())" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - mnist-net
+
+networks:
+  mnist-net:
+    driver: bridge
