@@ -67,6 +67,29 @@ curl -X POST "http://127.0.0.1:8000/predict" -F "file=@test/img_0_label_6.png"
 }
 ```
 
+### 本地測試指令 (使用 Python 腳本)
+
+**1. 單張圖片測試**
+修改 `tests/test_api_manual.py` 中的 `image_path` 可更換測試圖片。
+```bash
+python tests/test_api_manual.py
+```
+
+**2. 批次圖片測試 (API)**
+使用 `tests/test_api_batch_manual.py` 測試一次上傳多張圖片。
+```bash
+python tests/test_api_batch_manual.py
+```
+json
+{
+  "filename": "img_0_label_6.png",
+  "prediction": {
+    "predicted_class": 6,
+    "confidence": 0.99
+  }
+}
+```
+
 ### API 介面規格 (API Reference)
 
 #### 1. 單張圖片預測

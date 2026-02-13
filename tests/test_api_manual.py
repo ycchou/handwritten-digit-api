@@ -12,7 +12,7 @@ def test_api():
     url = "http://127.0.0.1:8000/predict"
     
     # 尋找測試圖片
-    image_path = "test/img_0_label_6.png"
+    image_path = "test/img_7_label_7.png"
     if not os.path.exists(image_path):
         # 嘗試找任何一張圖片
         import glob
